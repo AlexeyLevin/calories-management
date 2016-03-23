@@ -47,10 +47,9 @@ public class MealServlet extends HttpServlet {
         String action = request.getParameter("action");
         if (action == null) {
             final UserMeal userMeal = new UserMeal(
-                    LocalDateTime.parse(request.getParameter("dateTime")),
+                    LocalDateTime.parse(request.getParameter("dateTime").isEmpty() ? String.valueOf(LocalDateTime.now()) : request.getParameter("dateTime")),
                     request.getParameter("description"),
-                    Integer.valueOf(request.getParameter("calories")));
-
+                    Integer.valueOf(request.getParameter("calories").isEmpty() ? String.valueOf(0) : request.getParameter("calories")));
             if (request.getParameter("id").isEmpty()) {
                 LOG.info("Create {}", userMeal);
                 mealController.create(userMeal);
