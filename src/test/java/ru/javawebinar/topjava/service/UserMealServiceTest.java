@@ -1,7 +1,13 @@
 package ru.javawebinar.topjava.service;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -12,6 +18,7 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.Arrays;
 
@@ -27,8 +34,30 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class UserMealServiceTest {
 
+    private static final Logger LOG = LoggerFactory.getLogger(UserMealServiceTest.class);
+
     @Autowired
     protected UserMealService service;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Rule
+    public TestWatcher timeTestWatcher = new TestWatcher() {
+        long start;
+        long finish;
+        @Override
+        protected void starting(Description description) {
+            start = System.nanoTime();
+            LOG.info("{} starting {}", description.getMethodName(), LocalTime.now());
+        }
+        @Override
+        protected void finished(Description description) {
+            finish = System.nanoTime();
+            final double seconds = ((double)(finish - start) / 1000000000);
+            LOG.info("{} finished {} s.", description.getMethodName(), seconds);
+        }
+    };
 
     @Test
     public void testDelete() throws Exception {
@@ -39,6 +68,7 @@ public class UserMealServiceTest {
     @Test(expected = NotFoundException.class)
     public void testDeleteNotFound() throws Exception {
         service.delete(MEAL1_ID, 1);
+        thrown.expect(NotFoundException.class);
     }
 
     @Test
@@ -57,6 +87,7 @@ public class UserMealServiceTest {
     @Test(expected = NotFoundException.class)
     public void testGetNotFound() throws Exception {
         service.get(MEAL1_ID, ADMIN_ID);
+        thrown.expect(NotFoundException.class);
     }
 
     @Test
@@ -70,6 +101,7 @@ public class UserMealServiceTest {
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, USER_ID);
         service.update(item, ADMIN_ID);
+        thrown.expect(NotFoundException.class);
     }
 
     @Test
