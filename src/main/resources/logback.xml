@@ -24,6 +24,10 @@
         </encoder>
     </appender>
 
+    <logger name="org.hibernate.SQL" level="debug" >
+        <appender-ref ref="file"/>
+    </logger>
+
     <logger name="ru.javawebinar.topjava" level="debug"/>
 
     <root level="info">
