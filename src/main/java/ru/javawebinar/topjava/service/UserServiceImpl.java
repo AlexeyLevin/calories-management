@@ -4,24 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.to.UserWithUserMeals;
+import ru.javawebinar.topjava.util.UserMealsUtil;
 import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
-import java.util.Collection;
-import java.util.Objects;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * GKislin
  * 06.03.2015.
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, AdminUserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private UserMealRepository mealRepository;
 
     @CacheEvict(value = "users", allEntries = true)
     public User save(User user) {
@@ -55,5 +61,17 @@ public class UserServiceImpl implements UserService {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public void evictCache() {
+    }
+
+    @Override
+    @Transactional
+    public UserWithUserMeals getWithUserMealTO(int id) {
+        return UserMealsUtil.createUserWithUserMeals(repository.get(id), mealRepository.getAll(id));
+    }
+
+    @Override
+    @Transactional
+    public User getWithUserMealOneToMany(int userId) {
+        return repository.getWithMeals(userId);
     }
 }

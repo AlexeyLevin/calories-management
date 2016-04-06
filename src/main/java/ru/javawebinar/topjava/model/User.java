@@ -1,13 +1,13 @@
 package ru.javawebinar.topjava.model;
 
-import ru.javawebinar.topjava.util.UserMealsUtil;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
@@ -54,6 +54,11 @@ public class User extends NamedEntity {
     @Column(name = "calories_per_day", columnDefinition = "default 2000")
     @Digits(fraction = 0, integer = 4)
     protected int caloriesPerDay = UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName="id", updatable = false)
+    @OrderBy("dateTime DESC")
+    protected Collection<UserMeal> userMeals;
 
     public User() {
     }
@@ -117,6 +122,14 @@ public class User extends NamedEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public Collection<UserMeal> getUserMeals() {
+        return userMeals;
+    }
+
+    public void setUserMeals(Collection<UserMeal> userMeals) {
+        this.userMeals = userMeals;
     }
 
     @Override
