@@ -8,16 +8,16 @@
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
     <form method="post" action="users">
-    Login as: <select name="userId">
-    <option value="100000" selected>User</option>
-    <option value="100001">Admin</option>
-</select>
-    <button type="submit">Выбрать</button>
-</form>
-<ul>
-    <li><a href="users">User List</a></li>
-    <li><a href="meals">Meal List</a></li>
-</ul>
+        <fmt:message key="app.loginAs"/>: <select name="userId">
+        <option value="100000" selected>User</option>
+        <option value="100001">Admin</option>
+    </select>
+        <button type="submit"><fmt:message key="app.loginAs"/></button>
+    </form>
+    <ul>
+        <li><a href="users"><fmt:message key="app.userList"/></a></li>
+        <li><a href="meals"><fmt:message key="app.mealList"/></a></li>
+    </ul>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
