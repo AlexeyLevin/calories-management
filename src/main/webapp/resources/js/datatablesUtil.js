@@ -40,14 +40,12 @@ function mealFilter() {
         url: ajaxUrl + "filter",
         data: form.serialize(),
         success: function () {
-            $.get(ajaxUrl, function (data) {
                 datatableApi.clear();
                 $.each(data, function (key, item) {
-                    datatableApi.row.add(item);
+                    datatableApi.rows.add(item);
                 });
                 datatableApi.draw();
-            });
-            successNoty('filterd');
+            successNoty('filtered');
         }
     });
 }
