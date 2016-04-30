@@ -19,7 +19,7 @@
             <h3><fmt:message key="meals.title"/></h3>
 
             <div class="view-box">
-                <form method="post" action="meals/filter">
+                <form class="filter" id="filter">
                     <dl>
                         <dt>From Date:</dt>
                         <dd><input type="date" name="startDate" value="${startDate}"></dd>
@@ -135,29 +135,29 @@
 
     // $(document).ready(function () {
     $(function () {
-        datatableApi = $('#datatable').dataTable({
-            "bPaginate": false,
-            "bInfo": false,
-            "aoColumns": [
+        datatableApi = $('#datatable').DataTable({
+            "paging": false,
+            "info": false,
+            "columns": [
                 {
-                    "mData": "dateTime"
+                    "data": "dateTime"
                 },
                 {
-                    "mData": "description"
+                    "data": "description"
                 },
                 {
-                    "mData": "calories"
+                    "data": "calories"
                 },
                 {
-                    "sDefaultContent": "",
-                    "bSortable": false
+                    "defaultContent": "",
+                    "orderable": false
                 },
                 {
-                    "sDefaultContent": "",
-                    "bSortable": false
+                    "defaultContent": "",
+                    "orderable": false
                 }
             ],
-            "aaSorting": [
+            "order": [
                 [
                     0,
                     "asc"

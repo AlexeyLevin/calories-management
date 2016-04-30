@@ -37,11 +37,11 @@
                             <td><a href="mailto:${user.email}">${user.email}</a></td>
                             <td>${user.roles}</td>
                             <td>
-                                <input type="checkbox"
-                                       <c:if test="${user.enabled}">checked</c:if> id="${user.id}"/>
+                                <input class="changeStatus" type="checkbox"
+                                       <c:if test="${user.enabled}">checked</c:if> id="${user.id}" />
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                            <td><a class="btn btn-xs btn-primary edit" id="${user.id}">Edit</a></td>
+                            <td><a class="btn btn-xs btn-primary edit" id="${user.id}" email="${user.email}" name="${user.name}">Edit</a></td>
                             <td><a class="btn btn-xs btn-danger delete" id="${user.id}">Delete</a></td>
                         </tr>
                     </c:forEach>
@@ -67,7 +67,7 @@
                         <label for="name" class="control-label col-xs-3">Name</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder=Name" value="name">
                         </div>
                     </div>
 
@@ -75,7 +75,7 @@
                         <label for="email" class="control-label col-xs-3">Email</label>
 
                         <div class="col-xs-9">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="email" value="email">
                         </div>
                     </div>
 
@@ -111,35 +111,35 @@
 
     // $(document).ready(function () {
     $(function () {
-        datatableApi = $('#datatable').dataTable({
-            "bPaginate": false,
-            "bInfo": false,
-            "aoColumns": [
+        datatableApi = $('#datatable').DataTable({
+            "paging": false,
+            "info": false,
+            "columns": [
                 {
-                    "mData": "name"
+                    "data": "name"
                 },
                 {
-                    "mData": "email"
+                    "data": "email"
                 },
                 {
-                    "mData": "roles"
+                    "data": "roles"
                 },
                 {
-                    "mData": "enabled"
+                    "data": "enabled"
                 },
                 {
-                    "mData": "registered"
+                    "data": "registered"
                 },
                 {
-                    "sDefaultContent": "",
-                    "bSortable": false
+                    "defaultContent": "",
+                    "orderable": false
                 },
                 {
-                    "sDefaultContent": "",
-                    "bSortable": false
+                    "defaultContent": "",
+                    "orderable": false
                 }
             ],
-            "aaSorting": [
+            "order": [
                 [
                     0,
                     "asc"

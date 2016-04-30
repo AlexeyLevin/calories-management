@@ -13,8 +13,42 @@ function makeEditable() {
         return false;
     });
 
+    $('.edit').click(function () {
+        $('#id').val($(this).attr("id"));
+        $('#name').val($(this).attr("name"));
+        $('#email').val($(this).attr("email"));
+        $('#editRow').modal();
+    });
+
+    $('.changeStatus').click(function () {
+        changeActiveStatus($(this).attr("id"), $(this).attr("checked"));
+    });
+
+    $('#filter').submit(function () {
+        mealFilter();
+    });
+
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
+    });
+}
+
+function mealFilter() {
+    var form = $('#filter');
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "filter",
+        data: form.serialize(),
+        success: function () {
+            $.get(ajaxUrl, function (data) {
+                datatableApi.clear();
+                $.each(data, function (key, item) {
+                    datatableApi.row.add(item);
+                });
+                datatableApi.draw();
+            });
+            successNoty('filterd');
+        }
     });
 }
 
@@ -31,11 +65,11 @@ function deleteRow(id) {
 
 function updateTable() {
     $.get(ajaxUrl, function (data) {
-        datatableApi.fnClearTable();
+        datatableApi.clear();
         $.each(data, function (key, item) {
-            datatableApi.fnAddData(item);
+            datatableApi.row.add(item);
         });
-        datatableApi.fnDraw();
+        datatableApi.draw();
     });
 }
 
@@ -50,6 +84,17 @@ function save() {
             $('#editRow').modal('hide');
             updateTable();
             successNoty('Saved');
+        }
+    });
+}
+
+function changeActiveStatus(id, activeStatus) {
+    $.ajax({
+        url: ajaxUrl + id + "/" + activeStatus,
+        type: 'PUT',
+        success: function () {
+            updateTable();
+            successNoty('Change Active Status to user ' + id);
         }
     });
 }
