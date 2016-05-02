@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealTo;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.MealUtil;
@@ -27,6 +28,11 @@ public class UserMealAjaxController extends AbstractUserMealController {
         return super.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserMeal get(@PathVariable("id") int id) {
+        return super.get(id);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
@@ -42,7 +48,7 @@ public class UserMealAjaxController extends AbstractUserMealController {
         if (userMealTo.getId() == 0) {
             super.create(MealUtil.createFromTo(userMealTo));
         } else {
-            super.update(MealUtil.createFromTo(userMealTo), userMealTo.getId());
+            super.update(userMealTo, userMealTo.getId());
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
