@@ -23,6 +23,12 @@ function updateRow(id) {
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
+            if (key == "dateTime") {
+                var dateObject = new Date(value);
+                form.find("input[name='" + key + "']").val(
+                    dateObject.toISOString().substring(0, 10) + ' ' + dateObject.toISOString().substring(11, 16)
+                );
+            }
         });
         $('#editRow').modal();
     });

@@ -1,6 +1,31 @@
 var ajaxUrl = 'ajax/profile/meals/';
 var datatableApi;
 
+$('#datepicker1').datetimepicker({
+    timepicker:false,
+    format:'Y-m-d'
+});
+
+$('#datepicker2').datetimepicker({
+    timepicker:false,
+    format:'Y-m-d'
+});
+
+$('#timepicker1').datetimepicker({
+    datepicker:false,
+    format:'H:m'
+});
+
+$('#timepicker2').datetimepicker({
+    datepicker:false,
+    format:'H:m'
+});
+
+$('#datetimepicker').datetimepicker({
+    format: 'Y-m-d H:m'
+});
+
+
 function updateTable() {
     $.ajax({
         type: "POST",

@@ -21,26 +21,26 @@
                         <label class="control-label col-sm-2" for="startDate">From Date:</label>
 
                         <div class="col-sm-2">
-                            <input type="date" name="startDate" id="startDate">
+                            <input id="datepicker1" type="text" name="startDate" id="startDate">
                         </div>
 
                         <label class="control-label col-sm-2" for="endDate">To Date:</label>
 
                         <div class="col-sm-2">
-                            <input type="date" name="endDate" id="endDate">
+                            <input id="datepicker2" type="text" name="endDate" id="endDate">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="startTime">From Time:</label>
 
                         <div class="col-sm-2">
-                            <input type="time" name="startTime" id="startTime">
+                            <input id="timepicker1" type="text" name="startTime" id="startTime">
                         </div>
 
                         <label class="control-label col-sm-2" for="endTime">To Time:</label>
 
                         <div class="col-sm-2">
-                            <input type="time" name="endTime" id="endTime">
+                            <input id="timepicker2" type="text" name="endTime" id="endTime">
                         </div>
                     </div>
                     <div class="form-group">
@@ -83,7 +83,7 @@
                         <label for="datetime" class="control-label col-xs-3">Date</label>
 
                         <div class="col-xs-9">
-                            <input type="datetime-local" class="form-control" id="datetime"
+                            <input id="datetimepicker" type="text" class="form-control" id="datetime"
                                    name="dateTime" placeholder="Date">
                         </div>
                     </div>

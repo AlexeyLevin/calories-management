@@ -12,7 +12,7 @@ public class UserMealTo implements Serializable {
     protected Integer id;
 
     @NotNull(message = " must not be empty")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
     protected LocalDateTime dateTime;
 
     @NotEmpty
