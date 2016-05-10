@@ -1,12 +1,17 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealTo;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
+import ru.javawebinar.topjava.util.exception.ErrorInfo;
 import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,12 +43,19 @@ public class UserMealAjaxController extends AbstractUserMealController implement
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void updateOrCreate(@Valid UserMealTo mealTo) {
+    public ResponseEntity<ErrorInfo> updateOrCreate(@Valid UserMealTo mealTo, BindingResult result, HttpServletRequest req) {
+        if (result.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
+            ErrorInfo errorInfo = new ErrorInfo(req.getRequestURL().toString(), "ValidationException", sb.toString());
+            return new ResponseEntity<>(errorInfo, HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         if (mealTo.getId() == 0) {
             super.create(createFromTo(mealTo));
         } else {
             super.update(createFromTo(mealTo), mealTo.getId());
         }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

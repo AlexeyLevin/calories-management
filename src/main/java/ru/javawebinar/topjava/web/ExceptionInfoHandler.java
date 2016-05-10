@@ -6,7 +6,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -35,16 +34,8 @@ public interface ExceptionInfoHandler {
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     default ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
-        return logAndGetErrorInfo(req, e);
-    }
-
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    @ExceptionHandler(BindException.class)
-    @ResponseBody
-    @Order(Ordered.HIGHEST_PRECEDENCE + 2)
-    default ErrorInfo bindValidationError(HttpServletRequest req, BindException e) {
-        LOG.error("BindException at request " + req.getRequestURL());
-        return new ErrorInfo(req.getRequestURL(), e);
+        LOG.error("Exception at request " + req.getRequestURL());
+        return new ErrorInfo(req.getRequestURL().toString(), e.getClass().getSimpleName(), "User with this email already present in application.");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
