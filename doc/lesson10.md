@@ -78,7 +78,7 @@
     Сделать валидацию в AdminAjaxController/UserMealAjaxController через ValidationException
     (вернуть клиенту ErrorInfo и статус HttpStatus.UNPROCESSABLE_ENTITY)
 
-    Сделать обработку ошибки: регистрация и редактирование пользователяи профиля с уже имеющимся email
+    Сделать обработку ошибки: регистрация и редактирование профиля пользователя с уже имеющимся email
     (User with this email already present in application.)
 
 Optional.
