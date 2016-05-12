@@ -101,5 +101,5 @@ Datasources advanced
 
 # ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) <a href="http://goo.gl/forms/PtFcPqEV5n">Короткий опрос для всех участников проекта</a>
 
-## Приглашаю всех в <a href="https://join.skype.com/dToijYHZNcuc">группу выпускников 'Online Projects' в skype</a>.
+### Приглашаю всех в <a href="https://join.skype.com/dToijYHZNcuc">группу выпускников 'Online Projects' в skype</a>.
 Это общение по теме java, трудоустройство, зарплаты и пр. Добавиться можно по ссылке или напиши мне в скайп и я добавлю.
