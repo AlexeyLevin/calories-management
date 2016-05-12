@@ -56,7 +56,7 @@ Datasources advanced
    -  <a href="https://dzone.com/articles/simple-paas-comparison-guide">A Simple PaaS Comparison Guide (With the Java Dev in Mind)</a>
    -  <a href="http://www.ibm.com/developerworks/library/j-paasshootout/">Java PaaS shootout</a>
 
-## Домашнее задание по проекту:
+## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание по проекту:
 
     Сделать / обновить резюме
     Отдать на ревью мне или группе
@@ -99,7 +99,7 @@ Datasources advanced
 -  <a href="http://design-pattern.ru/">Справочник «Паттерны проектирования»</a>
 -  <a href="http://martinfowler.com/eaaCatalog/">Catalog of Patterns of Enterprise Application Architecture</a>
 
-# <a href="http://goo.gl/forms/PtFcPqEV5n">Короткий опрос для всех участников проекта</a>
+# ![question](https://cloud.githubusercontent.com/assets/13649199/13672858/9cd58692-e6e7-11e5-905d-c295d2a456f1.png) <a href="http://goo.gl/forms/PtFcPqEV5n">Короткий опрос для всех участников проекта</a>
 
 ## Приглашаю всех в <a href="https://join.skype.com/dToijYHZNcuc">группу выпускников 'Online Projects' в skype</a>.
 Это общение по теме java, трудоустройство, зарплаты и пр. Добавиться можно по ссылке или напиши мне в скайп и я добавлю.
