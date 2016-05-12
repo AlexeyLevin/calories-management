@@ -33,16 +33,15 @@
 > В `DataJpaUserRepositoryImpl` добавилась защита от удаления-модификации Admin/User
 
 -  <a href="http://habrahabr.ru/post/265591/">Деплой Java Spring приложения в PaaS-платформу Heroku</a>
+```
+Config Vars
+  ERROR_PAGE_URL=...
+  TOPJAVA_ROOT=/app
 
-
-     Config Vars
-        ERROR_PAGE_URL=...
-        TOPJAVA_ROOT=/app
-
-     Datasources advanced
-        ssl=true
-        sslfactory=org.postgresql.ssl.NonValidatingFactory
-
+Datasources advanced
+  ssl=true
+  sslfactory=org.postgresql.ssl.NonValidatingFactory
+```
 -  Ресурсы:
    -  <a href="https://www.heroku.com/">PaaS-платформа Heroku</a></h3>
    -  Конфигурирование приложения для запуска через <a href="https://devcenter.heroku.com/articles/java-webapp-runner">Tomcat-based Java Web</a>
