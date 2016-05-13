@@ -44,7 +44,8 @@ public interface ExceptionInfoHandler {
     @ExceptionHandler(BindException.class)
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 2)
-    default ErrorInfo bindValidationError(HttpServletRequest req, BindingResult result) {
+    default ErrorInfo bindValidationError(HttpServletRequest req, BindException e) {
+        BindingResult result = e.getBindingResult();
         LOG.error("ValidationException at request " + req.getRequestURL());
         StringBuilder sb = new StringBuilder();
         result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));

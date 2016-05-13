@@ -10,6 +10,10 @@
     <div class="container">
         <div class="navbar-header navbar-brand"><fmt:message key="app.title"/></div>
         <div class="navbar-collapse collapse">
+            <div class="locale navbar navbar-inverse navbar-right">
+                <li><a href="?lang=en">English</a></li>
+                <li><a href="?lang=ru">Русский</a></li>
+            </div>
             <form:form class="navbar-form navbar-right" role="form" action="spring_security_check" method="post">
                 <div class="form-group">
                     <input type="text" placeholder="Email" class="form-control" name='username'>

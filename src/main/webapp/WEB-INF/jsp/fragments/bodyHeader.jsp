@@ -9,6 +9,10 @@
         <a href="meals" class="navbar-brand"><fmt:message key="app.title"/></a>
 
         <div class="collapse navbar-collapse">
+            <div class="locale navbar navbar-inverse navbar-right">
+                <li><a href="?lang=en">English</a></li>
+                <li><a href="?lang=ru">Русский</a></li>
+            </div>
             <form:form class="navbar-form navbar-right" action="logout" method="post">
                 <sec:authorize access="isAuthenticated()">
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
