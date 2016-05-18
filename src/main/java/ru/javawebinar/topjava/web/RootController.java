@@ -44,7 +44,7 @@ public class RootController extends AbstractUserController {
                         @RequestParam(value = "error", required = false) boolean error,
                         @RequestParam(value = "message", required = false) String message) {
 
-        model. put("error", error);
+        model.put("error", error);
         model.put("message", message);
         return "login";
     }

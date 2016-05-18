@@ -76,6 +76,7 @@ public abstract class AbstractJdbcUserMealRepositoryImpl<T> implements UserMealR
                 "SELECT * FROM meals WHERE id = ? AND user_id = ?", rowMapper, id, userId);
         return DataAccessUtils.singleResult(userMeals);
     }
+
     public List<UserMeal> getAll(int userId) {
         return jdbcTemplate.query(
                 "SELECT * FROM meals WHERE user_id=? ORDER BY date_time DESC", rowMapper, userId);
