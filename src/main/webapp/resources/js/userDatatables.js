@@ -2,7 +2,9 @@ var ajaxUrl = 'ajax/admin/users/';
 var datatableApi;
 
 function updateTable() {
-    $.get(ajaxUrl, updateTableByData);
+    $.get(ajaxUrl, function (data) {
+        updateTableByData(data);
+    });
 }
 
 $(function () {

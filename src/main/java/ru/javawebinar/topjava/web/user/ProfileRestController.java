@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.User;
-import ru.javawebinar.topjava.to.UserTo;
 
 /**
  * GKislin
@@ -29,9 +28,8 @@ public class ProfileRestController extends AbstractUserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody UserTo userTo) {
-        userTo.setId(LoggedUser.id());
-        super.update(userTo);
+    public void update(@RequestBody User user) {
+        super.update(user, LoggedUser.id());
     }
 
     @RequestMapping(value = "/text", method = RequestMethod.GET)

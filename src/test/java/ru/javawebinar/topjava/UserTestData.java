@@ -1,11 +1,8 @@
 package ru.javawebinar.topjava;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.matcher.ModelMatcher;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
-import ru.javawebinar.topjava.util.PasswordUtil;
 import ru.javawebinar.topjava.util.UserUtil;
 
 import java.util.EnumSet;
@@ -19,13 +16,11 @@ import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
  * 24.09.2015.
  */
 public class UserTestData {
-    private static final Logger LOG = LoggerFactory.getLogger(UserTestData.class);
-
     public static final int USER_ID = START_SEQ;
     public static final int ADMIN_ID = START_SEQ + 1;
 
-    public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", 2005, Role.ROLE_USER);
-    public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", 1900, Role.ROLE_ADMIN, Role.ROLE_USER);
+    public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER);
+    public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN, Role.ROLE_USER);
 
     public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)), User.class);
 
@@ -44,7 +39,7 @@ public class UserTestData {
         }
 
         public User asUser() {
-            return UserUtil.prepareToSave(new User(this));
+            return new User(this);
         }
 
         @Override
@@ -69,7 +64,7 @@ public class UserTestData {
             }
 
             TestUser that = (TestUser) o;
-            return comparePassword(this.password, that.password)
+            return Objects.equals(this.password, that.password)
                     && Objects.equals(this.id, that.id)
                     && Objects.equals(this.name, that.name)
                     && Objects.equals(this.email, that.email)
@@ -77,15 +72,5 @@ public class UserTestData {
                     && Objects.equals(this.enabled, that.enabled)
                     && Objects.equals(this.roles, that.roles);
         }
-    }
-
-    private static boolean comparePassword(String rawPassword, String password) {
-        if (PasswordUtil.isEncoded(rawPassword)) {
-            LOG.warn("Expected password couldn't be compared with actual");
-        } else if (!PasswordUtil.isMatch(rawPassword, password)) {
-            LOG.error("Password " + password + " doesn't match encoded " + password);
-            return false;
-        }
-        return true;
     }
 }
