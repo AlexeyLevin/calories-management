@@ -175,6 +175,7 @@ protected void doPost(HttpServletRequest request, ...) {
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 ...
 ```
+- После выставления переменной окружения IDEA нужно рестартовать. Проверить, видит ли java переменную окуржения можно так: `System.getenv("TOPJAVA_ROOT")`. Еще вариант: добавить `-DTOPJAVA_ROOT=...` в опции запуска приложения, тогда она доступна из java как `System.getProperty("TOPJAVA_ROOT")`.
 
 ----------------------------
 
