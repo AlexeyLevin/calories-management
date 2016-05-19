@@ -7,9 +7,9 @@ import ru.javawebinar.topjava.util.UserMealsUtil;
  * 06.03.2015.
  */
 public class LoggedUser {
-
-    public static int id() {
-        return 1;
+    private static final Integer id = 1;
+    public static int getId() {
+        return id;
     }
 
     public static int getCaloriesPerDay() {

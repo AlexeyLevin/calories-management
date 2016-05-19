@@ -16,14 +16,18 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
     private UserRepository repository;
+
+    @Autowired
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public User save(User user) {
         return repository.save(user);
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws NotFoundException {
         ExceptionUtil.check(repository.delete(id), id);
     }
 

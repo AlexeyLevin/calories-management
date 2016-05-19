@@ -17,35 +17,35 @@ public abstract class AbstractUserController {
     @Autowired
     private UserService service;
 
-    public List<User> getAll() {
+    protected List<User> getAll() {
         LOG.info("getAll");
         return service.getAll();
     }
 
-    public User get(int id) {
-        LOG.info("get " + id);
+    protected User get(int id) {
+        LOG.info("get user by id: " + id);
         return service.get(id);
     }
 
-    public User create(User user) {
+    protected User create(User user) {
         user.setId(null);
-        LOG.info("create " + user);
+        LOG.info("create user by id: " + user);
         return service.save(user);
     }
 
-    public void delete(int id) {
-        LOG.info("delete " + id);
+    protected void delete(int id) {
+        LOG.info("delete user by id: " + id);
         service.delete(id);
     }
 
-    public void update(User user, int id) {
+    protected void update(User user, int id) {
         user.setId(id);
-        LOG.info("update " + user);
+        LOG.info("update user by id: " + user);
         service.update(user);
     }
 
-    public User getByMail(String email) {
-        LOG.info("getByEmail " + email);
+    protected User getByMail(String email) {
+        LOG.info("get user by email: " + email);
         return service.getByEmail(email);
     }
 }
